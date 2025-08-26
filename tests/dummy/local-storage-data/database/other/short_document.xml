@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+	<teiHeader>
+		<fileDesc>
+			<titleStmt>
+				<title>Vitae Prophetarum</title>
+			</titleStmt>
+			<publicationStmt>
+				<publisher>IRSB - Projet FNS « Éditer numériquement la littérature apocryphe
+					chrétienne » (ENLAC) </publisher>
+				<pubPlace>Lausanne</pubPlace>
+				<date>2021</date>
+			</publicationStmt>
+			<sourceDesc>
+				<msDesc xml:id="D">
+					<msIdentifier>
+						<country>France</country>
+						<settlement>Paris</settlement>
+						<repository>BNF</repository>
+						<collection>Gr</collection>
+						<idno>116</idno>
+					</msIdentifier>
+				</msDesc>
+			</sourceDesc>
+		</fileDesc>
+		<profileDesc>
+			<langUsage>
+				<language ident="gr">Greek</language>
+			</langUsage>
+		</profileDesc>
+		<revisionDesc status="revision1-finished">
+			<change/>
+		</revisionDesc>
+		<encodingDesc>
+      		<refsDecl>
+				<!--
+				<citeStructure unit="preface" match="//front/div" use="@type">
+					<citeStructure unit="preface_paragraph" match="p" use="position()" delim=".">
+						<citeStructure unit="linebreak" match="lb" use="position()" delim="."/>
+					</citeStructure>
+				</citeStructure>
+				-->
+				<citeStructure unit="book" match="//body/div" use="@n">
+					<citeData property="http://purl.org/dc/terms/title" use="head"/>
+					<citeStructure unit="chapter" match="div" use="position()" delim=" ">
+						
+						<citeData property="http://purl.org/dc/terms/title" use="head"/>
+						
+						<citeStructure unit="verse" match="p" use="position()" delim=":">
+							<citeStructure unit="line" match="line" use="position()" delim="."/>
+						</citeStructure>
+					</citeStructure>
+				</citeStructure>
+				<!--
+				<citeStructure unit="book" match="//body/div" use="@n">
+					<citeStructure unit="chapter" match="div" use="position()" delim=" ">
+						<citeData property="http://purl.org/dc/terms/title" use="head"/>
+						<citeStructure unit="verse" match="p" use="position()" delim=":"/>
+					</citeStructure>
+				</citeStructure>
+				-->
+				<citeStructure unit="postface" match="//back/div" use="@type">
+					<citeStructure unit="postface_paragraph" match="p" use="position()" delim="."/>
+				</citeStructure>
+				<!--
+				-->
+			</refsDecl>
+		</encodingDesc>
+	</teiHeader>
+	<text>
+        text
+		<front>
+			<div type="preface">
+				<p>my preface
+					<lb/>foo1
+					<lb/>bar1
+				</p>
+				<p>attention please</p>
+			</div>
+		</front>
+        <body>
+			<div n="Matthieu">
+				<head xml:lang="fr">l'Evangile selon Saint-Matthieu</head>
+				<div n="1">
+					<p n="1">
+						<line>
+							<t>foo1</t>
+							<t>foo2</t>
+							<t>foo3</t>
+							<t>foo4</t>
+						</line>
+						<line>bar1</line>
+						<line>baz1</line>
+						<line>qux1</line>
+					</p>
+					<p n="2">
+						<line n="1">foo2</line>
+						<line n="2">bar2</line>
+						<line n="3">baz2</line>
+						<line n="4">qux2</line>
+					</p>
+				</div>
+				<div n="2">
+					<p>
+						<line>l</line>
+						<line>l</line>
+						<line>l</line>
+						<line>l</line>
+						<line>l</line>
+					</p>
+					<p>div2 bar</p>
+					<p>div2 qux</p>
+				</div>
+			</div>
+			<div n="Jean">
+				<head xml:lang="fr">l'Evangile selon Saint-Jean</head>
+				<div n="1">
+					<head>verset 1</head>
+					<p n="1">
+						<line n="1">a</line>
+						<line n="2">b</line>
+						<line n="3">b</line>
+						<line n="4">b</line>
+						<line n="5">b</line>
+						<line n="6">b</line>
+						<line n="7">b</line>
+					</p>
+					<p n="2">
+						<line n="2">a</line>
+					</p>
+					<p n="3">
+						<line n="3">a</line>
+					</p>
+				</div>
+				<div n="2">
+					<head>verset 3</head>
+					<p n="1">
+						<line>a</line>
+					</p>
+					<p n="2">
+						<line>a</line>
+					</p>
+					<p n="3">
+						<line>a</line>
+					</p>
+				</div>
+				<div n="3">
+					<head>verset 3</head>
+					<p n="1">
+						<line>a</line>
+					</p>
+					<p n="2">
+						<line>a</line>
+					</p>
+					<p n="3">
+						<line>a</line>
+					</p>
+				</div>
+			</div>
+		</body>
+		<back>
+			<div type="postface">
+				<p>postface</p>
+			</div>
+		</back>
+	</text>
+</TEI>

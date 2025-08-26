@@ -1,0 +1,560 @@
+[
+  {
+    "id": "1",
+    "type": "collection",
+    "title": "Collection 1",
+    "lang": "en",
+    "parent": null,
+    "children": [
+      {
+        "id": "1-1",
+        "type": "collection",
+        "title": "Sub-Collection 1-1",
+        "lang": "en",
+        "parent": "1",
+        "children": [
+          {
+            "id": "resource-1",
+            "type": "Resource",
+            "title": "The Project Gutenberg eBook of Moby Dick",
+            "lang": "eng",
+            "parent": "1-1",
+            "description": "The Project Gutenberg eBook of Moby Dick",
+            "depth": 1,
+            "location": "melville/moby-dick.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              }
+            ],
+            "dublinCore": {}
+          },
+          {
+            "id": "resource-2",
+            "type": "Resource",
+            "title": "The Project Gutenberg eBook of War and Peace",
+            "lang": "eng",
+            "parent": "1-1",
+            "description": "The Project Gutenberg eBook of War and Peace",
+            "depth": 1,
+            "location": "tolstoy/war-and-peace.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              }
+            ],
+            "dublinCore": {}
+          },
+          {
+            "id": "resource-3",
+            "type": "Resource",
+            "title": "The Project Gutenberg eBook of Pride and Prejudice",
+            "lang": "eng",
+            "parent": "1-1",
+            "description": "The Project Gutenberg eBook of Pride and Prejudice",
+            "depth": 1,
+            "location": "austen/pride-and-prejudice.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              }
+            ],
+            "dublinCore": {}
+          },
+          {
+            "id": "short-document",
+            "type": "Resource",
+            "title": "The Project Gutenberg eBook of Short Document Stoy",
+            "lang": "eng",
+            "parent": "1-1",
+            "description": "The Project Gutenberg eBook of Short Document Stoy",
+            "depth": 1,
+            "location": "other/short_document.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              },
+              {
+                "name": "postface",
+                "position": 1
+              }
+            ],
+            "dublinCore": {}
+          },
+          {
+            "id": "st-augustin-confessions",
+            "type": "Resource",
+            "title": "The Project Gutenberg eBook of The Confessions of St. Augustine",
+            "lang": "eng",
+            "parent": "1-1",
+            "description": "The Project Gutenberg eBook of The Confessions of St. Augustine",
+            "depth": 1,
+            "location": "augustine/augustine-confessions.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              }
+            ]
+          },
+          {
+            "id": "pta001",
+            "type": "Resource",
+            "title": "De fide et lege naturae (Ms Ab)",
+            "lang": "grc",
+            "parent": "varia",
+            "description": "",
+            "depth": 1,
+            "location": "pta/pta0001.pta001.pta-MsAb.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              }
+            ]
+          },
+          {
+            "id": "vat-gr-1190",
+            "type": "Resource",
+            "title": "Martyre de Philippe",
+            "lang": "grc",
+            "parent": "root",
+            "description": "mss: Vaticanus gr 1190",
+            "depth": 1,
+            "location": "mp/vat-gr-1190.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              }
+            ]
+          },
+          {
+            "id": "jerusalem-pb-pt-66",
+            "type": "Resource",
+            "title": "Martyre de Philippe",
+            "lang": "grc",
+            "parents": "root",
+            "description": "mss: Sinai gr 1716",
+            "depth": 1,
+            "location": "mp/jerusalem-pb-pt-66.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              }
+            ]
+          },
+          {
+            "id": "sinai-gr-1716",
+            "type": "Resource",
+            "title": "Martyre de Philippe",
+            "lang": "grc",
+            "parent": "root",
+            "description": "mss: Sinai gr 1716",
+            "depth": 1,
+            "location": "mp/sinai-gr-1716.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              }
+            ]
+          },
+          {
+            "id": "petersbourg-gr-213",
+            "type": "Resource",
+            "title": "Martyre de Philippe",
+            "lang": "grc",
+            "parent": "root",
+            "description": "mss: Meteor h trin 116",
+            "depth": 1,
+            "location": "mp/petersbourg-906-gr-213.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              }
+            ]
+          },
+          {
+            "id": "meteor-h-trin-116",
+            "type": "Resource",
+            "title": "Martyre de Philippe",
+            "lang": "grc",
+            "parent": "root",
+            "description": "mss: Meteor h trin 116",
+            "depth": 1,
+            "location": "mp/meteor-h-trin-116.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              }
+            ]
+          },
+          {
+            "id": "petersbourg-gr-94",
+            "type": "Resource",
+            "title": "Martyre de Philippe",
+            "lang": "grc",
+            "parent": "root",
+            "description": "mss: Petersbourg 906 gr.94",
+            "depth": 1,
+            "location": "mp/petersbourg-906-gr-94.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              }
+            ]
+          },
+          {
+            "id": "brescia-a-72",
+            "type": "Resource",
+            "title": "Martyre de Philippe",
+            "lang": "grc",
+            "parent": "root",
+            "description": "mss: Brescia A III 3.72",
+            "depth": 1,
+            "location": "mp/brescia-A-III-3-72.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              },{
+                "name": "milestone",
+                "position": 1
+              }
+            ]
+          },
+          {
+            "id": "athous-iviron-450",
+            "type": "Resource",
+            "title": "Martyre de Philippe",
+            "lang": "grc",
+            "parent": "root",
+            "description": "mss: Athous Iviron 450",
+            "depth": 1,
+            "location": "mp/mp_athous_iviron.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              }
+            ]
+          }
+        ],
+        "description": "Description for Sub-Collection 1-1",
+        "depth": 1,
+        "dublinCore": {}
+      },
+      {
+        "id": "1-2",
+        "type": "collection",
+        "title": "Sub-Collection 1-2",
+        "lang": "en",
+        "parent": "1",
+        "children": [
+          {
+            "id": "resource-4",
+            "type": "Resource",
+            "title": "The Project Gutenberg eBook of The Adventures of Sherlock Holmes",
+            "lang": "eng",
+            "parent": "1-2",
+            "description": "The Project Gutenberg eBook of The Adventures of Sherlock Holmes",
+            "depth": 1,
+            "location": "doyle/adventures-of-sherlock-holmes.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              }
+            ],
+            "dublinCore": {}
+          },
+          {
+            "id": "resource-5",
+            "type": "Resource",
+            "title": "The Project Gutenberg eBook of The Adventures of Tom Sawyer",
+            "lang": "eng",
+            "parent": "1-2",
+            "description": "The Project Gutenberg eBook of The Adventures of Tom Sawyer",
+            "depth": 1,
+            "location": "twain/adventures-of-tom-sawyer.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              }
+            ],
+            "dublinCore": {}
+          }
+        ],
+        "description": "Description for Sub-Collection 1-2",
+        "depth": 1,
+        "dublinCore": {}
+      }
+    ],
+    "description": "Description for Collection 1",
+    "depth": 0,
+    "dublinCore": {
+      "title": [
+        {"lang": "fr", "value": "Collection générale."}
+      ]
+    }
+  },
+  {
+    "id": "2",
+    "type": "collection",
+    "title": "Collection 2",
+    "lang": "en",
+    "parent": null,
+    "children": [
+      {
+        "id": "2-1",
+        "type": "collection",
+        "title": "Sub-Collection 2-1",
+        "lang": "en",
+        "parent": "2",
+        "children": [
+          {
+            "id": "resource-6",
+            "type": "Resource",
+            "title": "The Project Gutenberg eBook of The Adventures of Huckleberry Finn",
+            "lang": "eng",
+            "parent": "2-1",
+            "description": "The Project Gutenberg eBook of The Adventures of Huckleberry Finn",
+            "depth": 1,
+            "location": "twain/adventures-of-huckleberry-finn.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              }
+            ],
+            "dublinCore": {}
+          }
+        ],
+        "description": "Description for Sub-Collection 2-1",
+        "depth": 1,
+        "dublinCore": {}
+      }
+    ],
+    "description": "Description for Collection 2",
+    "depth": 0,
+    "dublinCore": {}
+  },
+  {
+    "id": "3",
+    "type": "collection",
+    "title": "Collection 3",
+    "lang": "en",
+    "parent": null,
+    "children": [
+      {
+        "id": "3-1",
+        "type": "collection",
+        "title": "Sub-Collection 3-1",
+        "lang": "en",
+        "parent": "3",
+        "children": [
+          {
+            "id": "resource-7",
+            "type": "Resource",
+            "title": "The Project Gutenberg eBook of The Adventures of Tom Sawyer",
+            "lang": "eng",
+            "parent": "3-1",
+            "description": "The Project Gutenberg eBook of The Adventures of Tom Sawyer",
+            "depth": 1,
+            "location": "twain/adventures-of-tom-sawyer.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              }
+            ],
+            "dublinCore": {}
+          },
+          {
+            "id": "resource-8",
+            "type": "Resource",
+            "title": "The Project Gutenberg eBook of The Adventures of Huckleberry Finn",
+            "lang": "eng",
+            "parent": "3-1",
+            "description": "The Project Gutenberg eBook of The Adventures of Huckleberry Finn",
+            "depth": 1,
+            "location": "twain/adventures-of-huckleberry-finn.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              }
+            ],
+            "dublinCore": {}
+          }
+        ],
+        "description": "Description for Sub-Collection 3-1",
+        "depth": 1,
+        "dublinCore": {}
+      },
+      {
+        "id": "3-2",
+        "type": "collection",
+        "title": "Sub-Collection 3-2",
+        "lang": "en",
+        "parent": "3",
+        "children": [],
+        "description": "Description for Sub-Collection 3-2",
+        "depth": 1,
+        "dublinCore": {}
+      },
+      {
+        "id": "3-3",
+        "type": "collection",
+        "title": "Sub-Collection 3-3",
+        "lang": "en",
+        "parent": "3",
+        "children": [],
+        "description": "Description for Sub-Collection 3-3",
+        "depth": 1,
+        "dublinCore": {}
+      }
+    ],
+    "description": "Description for Collection 3",
+    "depth": 0,
+    "dublinCore": {}
+  },
+  {
+    "id": "4",
+    "type": "collection",
+    "title": "Collection 4",
+    "lang": "en",
+    "parent": null,
+    "children": [
+      {
+        "id": "4-1",
+        "type": "collection",
+        "title": "Sub-Collection 4-1",
+        "lang": "en",
+        "parent": "4",
+        "children": [
+          {
+            "id": "resource-9",
+            "type": "Resource",
+            "title": "The Project Gutenberg eBook of The Adventures of Sherlock Holmes",
+            "lang": "eng",
+            "parent": "4-1",
+            "description": "The Project Gutenberg eBook of The Adventures of Sherlock Holmes",
+            "depth": 1,
+            "location": "doyle/adventures-of-sherlock-holmes.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              }
+            ],
+            "dublinCore": {}
+          },
+          {
+            "id": "resource-10",
+            "type": "Resource",
+            "title": "The Project Gutenberg eBook of The Adventures of Tom Sawyer",
+            "lang": "eng",
+            "parent": "4-1",
+            "description": "The Project Gutenberg eBook of The Adventures of Tom Sawyer",
+            "depth": 1,
+            "location": "twain/adventures-of-tom-sawyer.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              }
+            ],
+            "dublinCore": {}
+          }
+        ],
+        "description": "Description for Sub-Collection 4-1",
+        "depth": 1,
+        "dublinCore": {}
+      },
+      {
+        "id": "4-2",
+        "type": "collection",
+        "title": "Sub-Collection 4-2",
+        "lang": "en",
+        "parent": "4",
+        "children": [
+          {
+            "id": "resource-11",
+            "type": "Resource",
+            "title": "The Project Gutenberg eBook of The Adventures of Huckleberry Finn",
+            "lang": "eng",
+            "parent": "4-2",
+            "description": "The Project Gutenberg eBook of The Adventures of Huckleberry Finn",
+            "depth": 1,
+            "location": "twain/adventures-of-huckleberry-finn.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              }
+            ],
+            "dublinCore": {}
+          }
+        ],
+        "description": "Description for Sub-Collection 4-2",
+        "depth": 1,
+        "dublinCore": {}
+      }
+    ],
+    "description": "Description for Collection 4",
+    "depth": 0,
+    "dublinCore": {}
+  },
+  {
+    "id": "5",
+    "type": "collection",
+    "title": "Collection 5",
+    "lang": "en",
+    "parent": null,
+    "children": [
+      {
+        "id": "5-1",
+        "type": "collection",
+        "title": "Sub-Collection 5-1",
+        "lang": "en",
+        "parent": "5",
+        "children": [
+          {
+            "id": "resource-12",
+            "type": "Resource",
+            "title": "The Project Gutenberg eBook of The Adventures of Huckleberry Finn",
+            "lang": "eng",
+            "parent": "5-1",
+            "description": "The Project Gutenberg eBook of The Adventures of Huckleberry Finn",
+            "depth": 1,
+            "location": "twain/adventures-of-huckleberry-finn.xml",
+            "CitationTrees": [
+              {
+                "name": "default",
+                "position": 0
+              }
+            ],
+            "dublinCore": {}
+          }
+        ],
+        "description": "Description for Sub-Collection 5-1",
+        "depth": 1,
+        "dublinCore": {}
+      }
+    ],
+    "description": "Description for Collection 5",
+    "depth": 0,
+    "dublinCore": {}
+  }
+]

@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "dts-api"
+version = "0.1.0"
+description = ""
+authors = ["renato <renato.diaz@unil.ch>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = {extras = ["standard"], version = "^0.116.1"}
+pydantic-settings = "^2.7.1"
+pyfakefs = "^5.7.4"
+lxml = "^5.4.0"
+pytest = "^8.3.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -21,8 +21,6 @@ https://distributed-text-services.github.io/specifications/
 - Error handling and validation for robust API interactions
 - Support for multiple storage backends (local filesystem, GitHub, ExistDb)
 
-The [Patristic Text Archive](https://pta.bbaw.de/en/) can also be accessed through this API, see .env.example file for configuration.
-
 ## Installation
 
 To run the api locally, clone the repository and install the required dependencies with Poetry:

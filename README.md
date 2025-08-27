@@ -40,6 +40,11 @@ FastAPI launcher can also be used if you have it installed:
 fastapi dev main.py
 ```
 
+deployments documentation can be found in the FastAPI documentation.
+
+https://fastapi.tiangolo.com/deployment/manually/
+
+
 ## Configuration
 
 To use the API, ensure that your documents are stored in the appropriate data storage.
@@ -55,11 +60,7 @@ An example of such metadata file can be found in the `tests/dummy/local-storage-
 When your database is ready, you have to configure the API to point to your data storage.
 This can be done by setting the `STORAGE` environment variable (.env).
 
-You also have to provide ths base path to your storage and the path to your metadata file by setting the `METADATA_PATH` environment variable (.env).
-
-deployments specifications can be found in the FastAPI documentation.
-
-https://fastapi.tiangolo.com/deployment/manually/
+You also have to provide the base path to your storage and the path to your metadata file by setting the `METADATA_PATH` environment variable (.env).
 
 ## Usage
 

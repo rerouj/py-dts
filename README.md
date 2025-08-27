@@ -40,7 +40,7 @@ FastAPI launcher can also be used if you have it installed:
 fastapi dev main.py
 ```
 
-deployments documentation can be found in the FastAPI documentation.
+deployment documentation can be found in the FastAPI documentation.
 
 https://fastapi.tiangolo.com/deployment/manually/
 

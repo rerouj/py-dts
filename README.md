@@ -8,6 +8,8 @@ full API purpose and specification can be found here:
 
 https://distributed-text-services.github.io/specifications/
 
+actual DTS api implementation version is **1-alpha**.
+
 ## Features
 
 - RESTful API for requesting documents and collections

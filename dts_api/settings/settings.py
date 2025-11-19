@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     tei_ns: str = None
 
     model_config = SettingsConfigDict(
-        env_file="/Users/rdiaz/coderepos/dts-api-workdir/dts-api/.env"
+        env_file=".env"
     )
 
 class OpenapiSettings(BaseModel):

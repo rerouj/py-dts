@@ -12,7 +12,11 @@ from dts_api.classes.Store import Store
 from dts_api.errors.CustomError import validation_exception_handler, not_found_exception_handler, \
     connection_error_exception_handler
 from dts_api.settings.settings import OpenapiSettings, get_settings
+from fastapi.middleware.cors import CORSMiddleware
 
+origins = [
+    "http://localhost:5173",
+]
 
 @asynccontextmanager
 async def lifespan(api: FastAPI):
@@ -45,7 +49,7 @@ def custom_openapi():
         version="0.1",
         servers=[
             {"url": "http://127.0.0.1:8000", "description": "Localhost"},
-            # {"url": "http://ftsr-dev.unil.ch:8082", "description": "ftsr admin server"}
+            {"url": "http://ftsr-dev.unil.ch:8000", "description": "ftsr admin server"}
         ],
         contact={"name": "Renato Diaz (FTSR-Unil)", "email": "renato.diaz@unil.ch"},
         routes=app.routes,
@@ -61,6 +65,13 @@ def custom_openapi():
     return app.openapi_schema
 
 app.openapi = custom_openapi
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

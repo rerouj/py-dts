@@ -93,7 +93,7 @@ class CollectionBuilder:
         if args:
             _, = args
         self.model.totalParents = self.store.get_index_count(self.model.id)
-        if self.model.type == 'collection':
+        if self.model.type == 'collection' or self.model.type == 'Collection':
             self.model.totalChildren = self.store.get_index_children_count(self.model.id)
             for item in self.model.items:
                 item.totalParents = self.store.get_index_count(item.id)

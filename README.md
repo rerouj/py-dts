@@ -46,7 +46,6 @@ deployment documentation can be found in the FastAPI documentation.
 
 https://fastapi.tiangolo.com/deployment/manually/
 
-
 ## Configuration
 
 To use the API, ensure that your documents are stored in the appropriate data storage.
@@ -57,16 +56,31 @@ Available storage backends can be extended by implementing a new Database class 
 PY-DTS does not impose a specific directory structure for your documents, but it is recommended to follow a consistent structure for easier management.
 Nevertheless, PY-DTS needs a metadata file in JSON format to describe the collections and documents available in the storage.
 
+The manifest.json can be served by a tier server or can be stored locally and served by the API itself.
+
 An example of such metadata file can be found in the `tests/dummy/local-storage-data/metadata.json` file.
 
 When your database is ready, you have to configure the API to point to your data storage.
-This can be done by setting the `STORAGE` environment variable (.env).
+This can be done by setting the `STORAGE` environment variable (.env). An example of such configuration can be found in the `.env.template` file.
 
 You also have to provide the base path to your storage and the path to your metadata file by setting the `METADATA_PATH` environment variable (.env).
 
+## Docker
+
+A Dockerfile is provided for easy deployment. To build the Docker image, run the following command in the project directory:
+
+```bash
+docker build -t py-dts .
+```
+To run the Docker container, use the following command:
+
+```bash
+docker run -d -p 8000:8000 --name py-dts-container py-dts
+```
+
 ## Usage
 
-If your server is running locally, it should be available at `http://localhost:8000/docs`.
+If your server is running locally, it should be available at `http://localhost:8000/docs` or `http://localhost:8000/redoc`. The API contract is available at `http://localhost:8000/openapi.json`.
 
 the root endpoint is `http://localhost:8000/api/dts/v1`. (url prefix can be modified in the `main.py` file.)
 
@@ -115,7 +129,6 @@ Feel free to contribute to the project by submitting pull requests !
 ## Todos:
 
 - add JsonDesigner class to design a json representation of a Document.
-- add a Dockerfile to build and run a containerized version of the api.
 - allow non dublin core metadata to be extracted from an XML document and inserted inside the 'extension' field of a Navigation representation
 - add profileDesc extractor feature, allow dc metadata from xml file at the main level, convert and insert those data inside a Collection representation
 - same thing for non dc metadata, allow them to be extracted from an XML document and inserted inside the 'extension' field of a Collection representation

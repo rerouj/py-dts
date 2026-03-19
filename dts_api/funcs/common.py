@@ -158,7 +158,7 @@ def tag_original_document(*args) -> tuple[ElementTree, str, bool]:
                     ref = "1"
             else:
                 ref = element.get(structure_el.get('use')[1:])
-
+            # todo : handle the case when the attribute used for ref is not present in the element (ex: @id is missing)
             citable_unit.set('ref', ref)
             citable_unit.set('unit', structure_el.get('unit'))
             citable_unit.set('match', match)

@@ -107,6 +107,19 @@ The API documentation can be found at `https://distributed-text-services.github.
 curl --request GET \
   --url 'http://127.0.0.1:8000/api/dts/v1/document?resource=st-augustin-confessions&media_type=text%2Fhtml'
 
+## caveat
+### about the lines (<lb \/> tag)
+
+The API currently support the ```<lb/>``` tag as a line tag, but, in order to work properly, there is two conditions:
+- a citeStrucure with a ```use``` parameter set to ```@n``` will only map a ```lb``` with a provided ```n``` attribute.
+- you should add a "ghost" ```<lb/>``` tag before the first line of the document, with a ```n``` attribute equal to ```first_line - 1``` or 0.
+- citeStrucure with a ```use``` parameter set to ```position()``` will need an empy ```lb``` before the first line of the document.
+
+**Generally, correctly formatted XML documents should be provided to the API, specially when the ```use``` parameter is set to a value that is not equal to ```position()```.**
+
+An example is provided in the ```/tests/dummy/local-storage-data/database/mp/athous-iviron-450.xml``` file
+for the moment the API does not bring information on bad formatted documents, but this will be added in the future.
+
 ## Dependencies
 
 - poetry

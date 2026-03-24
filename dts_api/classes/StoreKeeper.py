@@ -47,15 +47,15 @@ class CommonStoreKeeper:
         if item.type == 'collection':
             raise ResourceNotFoundError("this resource is a collection")
 
-        if not self.cache.get(item.id):
+        if not self.cache.get(item.id) or self.cache.get(item.id)[4] != params.tree:
             document, cite_metadata, cite_structure = self.store.get_document(item)
             args = [*self.store.get_document(item), params.tree, self.nsmap]
 
             # todo: move this to chain of responsibility pattern
             toc: Element = self.pipeline(*args)
-            self.cache.set(item.id, (toc, document, cite_metadata, cite_structure))
+            self.cache.set(item.id, (toc, document, cite_metadata, cite_structure, params.tree))
         else:
-            toc, document, cite_metadata, cite_structure, = self.cache.get(item.id)
+            toc, document, cite_metadata, cite_structure, last_selected_tree = self.cache.get(item.id)
 
         # todo: move this inside the store.get_document method
         citation_trees = get_citation_trees(None, cite_metadata, cite_structure, params.tree, None)[1]

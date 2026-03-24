@@ -141,6 +141,7 @@ Feel free to contribute to the project by submitting pull requests !
 
 ## Todos:
 
+- add a parameter that limits the reading scope of a document. For instance ```scope: 107, 120``` would only read the main citation element between 107 and 120 of the document. the parameter is set into the manifest.json file.
 - add JsonDesigner class to design a json representation of a Document.
 - allow non dublin core metadata to be extracted from an XML document and inserted inside the 'extension' field of a Navigation representation
 - add profileDesc extractor feature, allow dc metadata from xml file at the main level, convert and insert those data inside a Collection representation

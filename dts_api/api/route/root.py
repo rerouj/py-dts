@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 from starlette.requests import Request
 
+from dts_api.classes.Cache import Cache
 from dts_api.model.RootModel import RootModel
 from dts_api.settings.settings import Settings, get_settings
 
@@ -17,3 +18,9 @@ def get_root(request: Request, settings: Settings = Depends(get_settings)):
         navigation="%snavigation/{?resource,ref,start,end,down,tree,page}" % request.url,
         document="%sdocument/{?resource,ref,start,end,tree,mediaType}" % request.url
     )
+
+@router.get('/reset_cache', description="Reset cache endpoint", include_in_schema=False)
+def reset_cache():
+    cache = Cache()
+    cache.clear()
+    return {"value": "Cache reset successfully"}

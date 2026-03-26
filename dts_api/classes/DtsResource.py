@@ -17,8 +17,12 @@ class DtsResource:
         if kwargs:
             _, = kwargs
 
+        document_copy = deepcopy(document.getroot())
+
+        for pi in document.xpath('//processing-instruction()'):
+            self.dts_resource.find('%sproc' % namespace, namespaces=nsmap).append(deepcopy(pi))
         self.dts_resource.find('%sDocument' % namespace, namespaces=nsmap).set('resource', resource)
-        self.dts_resource.find('%sDocument' % namespace, namespaces=nsmap).append(deepcopy(document.getroot()))
+        self.dts_resource.find('%sDocument' % namespace, namespaces=nsmap).append(document_copy)
         self.dts_resource.find('%sCitationTrees' % namespace, namespaces=nsmap).extend(deepcopy(cite_structure))
         self.dts_resource.find('%sTableOfContent' % namespace).append(deepcopy(toc.getroot()))
 

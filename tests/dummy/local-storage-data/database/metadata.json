@@ -240,11 +240,15 @@
             "parent": "root",
             "description": "mss: Athous Iviron 450",
             "depth": 1,
-            "location": "mp/mp_athous_iviron.xml",
+            "location": "mp/athous-iviron-450.xml",
             "CitationTrees": [
               {
                 "name": "default",
                 "position": 0
+              },
+              {
+                "name": "diplomatic",
+                "position": 1
               }
             ]
           }

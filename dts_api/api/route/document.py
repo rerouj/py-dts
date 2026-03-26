@@ -13,7 +13,7 @@ def get(query: document_params, service: service_selector):
     if doc is None:
         raise HTTPException(status_code=404, detail="Document not found.")
     if query.media_type == 'text/xml':
-        return Response(content=etree.tostring(doc, encoding='utf-8', pretty_print=True, xml_declaration=False), media_type="application/xml")
+        return Response(content=etree.tostring(doc, encoding='UTF-8', pretty_print=True, xml_declaration=True), media_type="application/xml")
     if query.media_type == 'text/html':
         return HTMLResponse(str(doc))
 

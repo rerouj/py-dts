@@ -322,6 +322,7 @@ def is_param(path: str) -> bool:
 def set_dts_resource(namespace: str = 'http://www.tei-c.org/ns/1.0'):
 
     base = f'<?xml version="1.0"?><DtsResource xmlns="{namespace}">' \
+           '<proc></proc>' \
            '<CitationTrees></CitationTrees><TableOfContent></TableOfContent>' \
            '<Document></Document></DtsResource>'
 

@@ -1,7 +1,7 @@
 from typing import Protocol
 
 from lxml import etree
-from lxml.etree import ElementTree, Element
+from lxml.etree import ElementTree, Element, _Element, _ElementTree
 
 
 class Designer(Protocol):
@@ -43,8 +43,14 @@ class XmlDesigner:
         fragment, dts_resource, nsmap = args
         if kwargs:
             _, = kwargs
-        resource: Element = fragment.find('TEI', namespaces=nsmap)
-        representation: ElementTree = ElementTree(resource)
+        proc = dts_resource.find('proc', namespaces=nsmap)
+        resource: _Element = fragment.find('TEI', namespaces=nsmap)
+
+        root = etree.Element("TEI", nsmap=nsmap)
+        representation = etree.ElementTree(root)
+        for pi in proc:
+            root.addprevious(pi)
+        root.extend(resource)
 
         return representation
 
@@ -57,22 +63,26 @@ class XmlDesigner:
 
         with open("dts_api/template/dts_tei_template.xml", "r") as file:
 
-            document: ElementTree = etree.parse(file)
+            document: _ElementTree = etree.parse(file)
             namespace = list(nsmap.values()).pop()
+            proc = dts_resource.find('proc', namespaces=nsmap)
             header = dts_resource.find('{%s}Document/TEI/teiHeader' % namespace, namespaces=nsmap)
 
             if len(fragment):
                 # todo : add doc
 
                 base = "{%s}wrapper" % "https://w3id.org/dts/api#"
-                element: Element = Element(base, nsmap={"dts": "https://w3id.org/dts/api#"})
+                element: _Element = Element(base, nsmap={"dts": "https://w3id.org/dts/api#"})
                 for cite_unit in fragment:
                     for xml_el in cite_unit.find("content").iterchildren():
                         element.append(xml_el)
 
-                root_node: Element = document.getroot()
+                root_node: _Element = document.getroot()
+                for pi in proc:
+                    root_node.addprevious(pi)
                 document_header = document.find('{%s}teiHeader' % namespace, namespaces=nsmap)
                 root_node.replace(document_header, header)
                 body = document.find('.//body', namespaces={None: namespace})
                 body.append(element)
                 return document
+            return None

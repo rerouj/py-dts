@@ -1,5 +1,5 @@
 from typing import Optional, Any
-from pydantic import BaseModel, Field, AliasChoices, model_validator, ConfigDict
+from pydantic import BaseModel, Field, AliasChoices, model_validator, field_validator
 
 from dts_api.classes.Utils import set_path
 from dts_api.model.MetadataModel import IndexMetadataModel
@@ -28,6 +28,13 @@ class CollectionBase(BaseModel):
     index: Optional["IndexMetadataModel"] = Field(default=None, exclude=True)
     url_components: "UrlComponent" = Field(default=None, exclude=True)
 
+    @field_validator("type", mode="before")
+    @classmethod
+    def normalize_type_first_letter(cls, value):
+        if isinstance(value, str) and value:
+            return value[0].upper() + value[1:]
+        return value
+
 class Collection(CollectionBase):
 
     # model_config = ConfigDict(serialize_by_alias=True)
@@ -43,7 +50,7 @@ class Collection(CollectionBase):
     @classmethod
     def choose_items_model(cls, values):
         if "type" in values:
-            values["children"] = [SubCollection(**item, index=values["index"], url_components=values["url_components"]) if item['type'] == 'collection' else SubCollectionResource(**item, totalChildren=0, index=values["index"], url_components=values["url_components"]) for item in values['children']]  # Use ExtraFieldsAddress
+            values["children"] = [SubCollection(**item, index=values["index"], url_components=values["url_components"]) if item.get('type', '').lower() == 'collection' else SubCollectionResource(**item, totalChildren=0, index=values["index"], url_components=values["url_components"]) for item in values['children']]  # Use ExtraFieldsAddress
         return values
 
     def model_post_init(self, __context: Any) -> None:
@@ -92,12 +99,13 @@ class CollectionResource(CollectionBase):
             values["children"] = [
                 SubCollection(
                     **item, index=values["index"],
-                    url_components=values["url_components"]) if item['type'] == 'collection' else SubCollectionResource(
+                    url_components=values["url_components"]) if item.get('type', '').lower() == 'collection' else SubCollectionResource(
                         **item, totalChildren=0, index=values["index"], url_components=values["url_components"]
                 ) for item in values['children']]  # Use ExtraFieldsAddress
         return values
 
     def model_post_init(self, __context: Any) -> None:
+        self.dtsVersion = f"{settings.dts_version}"
         self.navigation = set_path(self.id, 'navigation', self.url_components)
         self.document = set_path(self.id, 'document', self.url_components)
         self.collection = "%s?id=%s{?id,page,nav}" % (self.url_components.url, self.id)
@@ -122,7 +130,7 @@ class CollectionResourcePagination(Collection, CollectionResource):
     def choose_items_model(cls, values):
         if "type" in values:
             values["children"] = [
-                SubCollection(**item, index=values["index"], url_components=values["url_components"]) if item['type'] == 'collection' else SubCollectionResource(
+                SubCollection(**item, index=values["index"], url_components=values["url_components"]) if item.get('type', '').lower() == 'collection' else SubCollectionResource(
                     **item, totalChildren=0, index=values["index"], url_components=values["url_components"]
                 ) for item in values['children']]  # Use ExtraFieldsAddress
         return values

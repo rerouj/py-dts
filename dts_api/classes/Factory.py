@@ -29,7 +29,7 @@ class CollectionFactory:
         self.builder.decorate(index)
         if collection.items and collection.type == 'Resource':
             self.builder.paginate(collection.items, params)
-        if collection.type == "collection":
+        if collection.type == "Collection":
             self.builder.paginate(collection.items, params)
         return self.builder.get_representation()
 

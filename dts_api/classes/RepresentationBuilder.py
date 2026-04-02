@@ -65,7 +65,7 @@ class CollectionBuilder:
 
         url_components: UrlComponent = get_url_components(self.request, params)
 
-        if content.get('type') == 'collection':
+        if content.get('type') == 'Collection':
             self.model = self.collection(**content, index=index, url_components=url_components)
         else:
             if 'children' in content:

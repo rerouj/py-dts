@@ -11,12 +11,10 @@ from dts_api.classes.Cache import Cache
 from dts_api.classes.Store import Store
 from dts_api.errors.CustomError import validation_exception_handler, not_found_exception_handler, \
     connection_error_exception_handler
-from dts_api.settings.settings import OpenapiSettings, get_settings
+from dts_api.settings.settings import settings
 from fastapi.middleware.cors import CORSMiddleware
 
-origins = [
-    "http://localhost:5173",
-]
+origins = settings.allowed_hosts
 
 @asynccontextmanager
 async def lifespan(api: FastAPI):
@@ -26,8 +24,6 @@ async def lifespan(api: FastAPI):
     Cache()
     print("####### end startup events #######")
     yield
-
-openapi_settings = OpenapiSettings()
 
 app = FastAPI(
     lifespan=lifespan,
@@ -44,14 +40,11 @@ def custom_openapi():
     if app.openapi_schema:
         return app.openapi_schema
     openapi_schema = get_openapi(
-        title="DTS-API: Littérature Apocryphe Chrétienne",
-        description="API des éditions du projet ENLAC",
+        title=settings.app_name,
+        description=settings.app_description,
         version="0.1",
-        servers=[
-            {"url": "http://127.0.0.1:8000", "description": "Localhost"},
-            {"url": "http://ftsr-dev.unil.ch:8000", "description": "ftsr admin server"}
-        ],
-        contact={"name": "Renato Diaz (FTSR-Unil)", "email": "renato.diaz@unil.ch"},
+        servers=settings.app_url,
+        contact=settings.app_author_infos,
         routes=app.routes,
         tags=[
                 {"name": "root", "description": "Root route, returns global infos."},

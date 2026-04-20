@@ -67,16 +67,32 @@ You also have to provide the base path to your storage and the path to your meta
 
 ## Docker
 
-A Dockerfile is provided for easy deployment. To build the Docker image, run the following command in the project directory:
+PY-DTS can also be deployed using Docker with :
 
 ```bash
-docker build -t py-dts .
+docker/podman run -p 8000:8000 --name pydts renatodiaz/py-dts:latest
 ```
-To run the Docker container, use the following command:
 
-```bash
-docker run -d -p 8000:8000 --name py-dts-container py-dts
-```
+Available tags are provided in the [DockerHub repository]("https://hub.docker.com/repository/docker/renatodiaz"). You can also build the image locally with the provided Dockerfile.
+
+## Variables
+
+The API can be configured with the following environment variables:
+
+- `APP_NAME`: the name of the application, used in the API documentation.
+- `APP_DESCRIPTION`: a short description of the application, used in the API documentation.
+- `APP_AUTHOR_INFOS`: a dict containing the name and email of the author, used in the API documentation.
+- `APP_URL`: a JSON string containing a list of URLs and their descriptions, used in the API documentation.
+- `DTS_CONTEXT`: the URL of the DTS context to use for JSON-LD serialization, the default value is `https://distributed-text-services.github.io/specifications/context/1-alpha1.json`.
+- `DTS_VERSION`: the version of the DTS specification to use, the default value is `1-alpha`.
+- `ROOT_COLLECTION`: the root collection to use, the default value is `None`.
+- `ALLOWED_ORIGINS`: a list of allowed origins for CORS settings, set to `*` to allow all origins, or specify a comma-separated list of allowed origins (e.g. `http://localhost:3000,http://example.com`).
+- `STORAGE`: the storage backend to use, available options are `local` and `github`.
+- `INDEXER`: the indexer to use, available options are `standard` (the default one) and `custom` (not implemented yet).
+- `BASE_PATH`: the base path to the storage, not needed for github storage, but required for local storage.
+- `METADATA_PATH`: the path to the metadata file, can be a local path or a URL, depending on the storage backend used.
+- `TEI_NS`: the TEI namespace to use for XML parsing, the default value is `http://www.tei-c.org/ns/1.0`.
+
 
 ## Usage
 
@@ -118,7 +134,7 @@ The API currently support the ```<lb/>``` tag as a line tag, but, in order to wo
 **Generally, correctly formatted XML documents should be provided to the API, specially when the ```use``` parameter is set to a value that is not equal to ```position()```.**
 
 An example is provided in the ```/tests/dummy/local-storage-data/database/mp/athous-iviron-450.xml``` file
-for the moment the API does not bring information on bad formatted documents, but this will be added in the future.
+for the moment the API does not bring information on document validation, but this will be added in the future.
 
 ## Dependencies
 

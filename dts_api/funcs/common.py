@@ -5,7 +5,7 @@ from lxml.etree import Element, ElementTree, XML
 from dts_api.classes.Utils import nsmp
 
 
-def get_citation_trees(*args):
+def set_citation_trees(*args):
 
     document_citation_trees: Element
     metadata: list
@@ -20,6 +20,51 @@ def get_citation_trees(*args):
     ]
     return tree, citation_trees, document, nsmap
 
+
+def build_citation_trees(citation_trees: Element):
+    """
+                    define citationTrees content from the citation_trees objects in a xml document
+
+                    :param citation_trees: citation_trees object from metadata, containing one or multiple citeStructure root elements
+                    :return: list
+                    """
+
+    item: Element
+    deployed_citation_trees: list = []
+    max_cite_depth = []
+    for tree in citation_trees:
+        count = 0
+        tmp = [{"@type": "CiteStructure", "citeType": structure.get('unit'),
+                "parent": structure.getparent().get('unit')} for structure in
+               tree['element'].iter('{http://www.tei-c.org/ns/1.0}citeStructure')]
+
+        while len(tmp) > 1:
+            count += 1
+            child = tmp.pop()
+            for item in tmp:
+                if child['parent'] == item['citeType']:
+                    if 'citeStructure' in item.keys():
+                        cpy = deepcopy(child)
+                        del cpy['parent']
+                        item['citeStructure'].append(cpy)
+                    else:
+                        cpy = deepcopy(child)
+                        del cpy['parent']
+                        item['citeStructure'] = [cpy]
+        max_cite_depth.append(count)
+        for item in tmp:
+            del item['parent']
+        identifier = {'identifier': tree['name']}
+        tmp[0] = {
+            "@type": "CitationTree",
+            "maxCiteDepth": count + 1,
+            "citeStructure": [{**identifier, **tmp[0]}]
+        }
+        deployed_citation_trees.append(tmp.pop())
+    if len(deployed_citation_trees) == 1:
+        del deployed_citation_trees[0]['citeStructure'][0]['identifier']
+
+    return deployed_citation_trees, max(max_cite_depth) + 1
 
 def select_tree(*args):
 

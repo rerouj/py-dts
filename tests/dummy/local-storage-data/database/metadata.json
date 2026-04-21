@@ -4,11 +4,12 @@
     "type": "Collection",
     "title": "Collection 1",
     "lang": "en",
+    "description": "Description for Collection 1",
     "parent": null,
     "children": [
       {
         "id": "1-1",
-        "type": "collection",
+        "type": "Collection",
         "title": "Sub-Collection 1-1",
         "lang": "en",
         "parent": "1",
@@ -22,6 +23,7 @@
             "description": "The Project Gutenberg eBook of Short Document Stoy",
             "depth": 1,
             "location": "other/short_document.xml",
+            "download": "https://raw.githubusercontent.com/unilenlac/martyre-philippe/refs/heads/main/transcriptions/athous-iviron-450.xml",
             "CitationTrees": [
               {
                 "name": "default",

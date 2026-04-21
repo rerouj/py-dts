@@ -15,7 +15,7 @@ from dts_api.classes.Utils import default_index_algorithm, collection_paginator,
 from dts_api.classes.RepresentationBuilder import CollectionBuilder, NavigationBuilder
 from dts_api.classes.Factory import CollectionFactory, NavigationFactory, DocumentFactory
 from dts_api.classes.StoreKeeper import CollectionStoreKeeper, NavigationStoreKeeper, DocumentStoreKeeper
-from dts_api.classes.ContentExtractor import JsonContentExtractor, NavigationContentExtractor, \
+from dts_api.classes.ContentExtractor import CollectionContentExtractor, NavigationContentExtractor, \
     DocumentContentExtractor
 
 def service_selector(factory: "factory_selector", storekeeper: "storekeeper_selector", actual_route: "requested_route"):
@@ -58,7 +58,7 @@ def default_adapter():
 def extractor_selector(actual_route: "requested_route"):
 
     extractors = {
-        'collection': JsonContentExtractor,
+        'collection': CollectionContentExtractor,
         'navigation': NavigationContentExtractor,
         'document': DocumentContentExtractor,
     }

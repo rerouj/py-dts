@@ -4,16 +4,17 @@ from lxml.etree import Element
 from websockets import Protocol
 
 from dts_api.classes.Cache import Cache
-from dts_api.classes.ContentExtractor import ContentExtractor
+from dts_api.classes.ContentExtractor import ContentExtractor, JsonContentExtractor
 from dts_api.classes.DtsResource import DtsResource
 from dts_api.classes.Error import CollectionNotFoundError, ResourceNotFoundError
 from dts_api.classes.Indexer import Indexer
 from dts_api.classes.Pipeline import TocPipelineBuilder
 from dts_api.classes.Store import Store
 from dts_api.classes.Utils import nsmp
+from dts_api.errors.CustomError import MetadataValidationError
 from dts_api.model.MetadataModel import IndexMetadataModel
 from dts_api.model.ParameterModel import CollectionParams, PostCollectionParams, DeleteCollectionParams
-from dts_api.funcs.common import get_citation_trees
+from dts_api.funcs.common import set_citation_trees
 
 collection_params = Union[CollectionParams | PostCollectionParams | DeleteCollectionParams]
 
@@ -25,6 +26,7 @@ class CommonStoreKeeper:
 
     def __init__(self, store, content_extractor: ContentExtractor, indexer: Indexer, settings):
         self.store: Store = store
+        self.metadata_extractor: ContentExtractor = JsonContentExtractor()
         self.content_extractor: ContentExtractor = content_extractor
         self.indexer = indexer
         self.settings = settings
@@ -58,7 +60,7 @@ class CommonStoreKeeper:
             toc, document, cite_metadata, cite_structure, last_selected_tree = self.cache.get(item.id)
 
         # todo: move this inside the store.get_document method
-        citation_trees = get_citation_trees(None, cite_metadata, cite_structure, params.tree, None)[1]
+        citation_trees = set_citation_trees(None, cite_metadata, cite_structure, params.tree, None)[1]
 
         self.dts_resource.set_dts_resource(params.resource, self.namespace, self.nsmap, document, cite_structure, toc)
 
@@ -95,16 +97,38 @@ class CollectionStoreKeeper(CommonStoreKeeper) :
         content: dict
 
         if params.nav == 'parents' and main_entry.depth:
-            main_content = self.content_extractor.extract_content(md, main_entry.path)
-            main_content['children'] = [self.content_extractor.extract_content(md, entry.parent) for entry in index_entries]
+            main_content = self.metadata_extractor.extract_content(md, main_entry.path)
+            main_content['children'] = [self.metadata_extractor.extract_content(md, entry.parent) for entry in index_entries]
             content = main_content
         elif params.nav == 'parents' and not main_entry.depth:
-            main_content = self.content_extractor.extract_content(md, main_entry.path)
+            main_content = self.metadata_extractor.extract_content(md, main_entry.path)
             main_content['children'] = []
             content = main_content
         else:
             path = main_entry.path
-            content = self.content_extractor.extract_content(md, path)
+            content = self.metadata_extractor.extract_content(md, path)
+            if "children" in content:
+                children = [child for child in content["children"] if child.get('type', '').lower() == 'resource']
+                for i, child in enumerate(children):
+                    child_md: IndexMetadataModel = self.store.get_index_entry(child['id'])[0]
+                    if child_md.citation_trees:
+                        tree, citation_tree, cite_structure = self.store.get_document(child_md)
+                        tmp_citation_trees = set_citation_trees(None, citation_tree, cite_structure, None, None)[1]
+                        citation_trees, max_cite_depth = self.content_extractor.extract_content(structure=tmp_citation_trees)
+                        content['children'][i]['CitationTrees'] = citation_trees
+                    else:
+                        raise MetadataValidationError(errors=[{
+                            'type': 'MetadataValidationError',
+                            'loc': [content['id'], child['id'], 'citation_trees'],
+                            'msg': f"Resource with id '{child['id']}' is "
+                                   f"missing citation tree information "
+                                   f"in the index metadata. Please provide"
+                                   f" the basic CitationTree : {{"
+                                   f"'name': 'default'"
+                                   f"'position': 0"
+                                   f"}}"
+                        }])
+
         return main_entry, content
 
 class NavigationStoreKeeper(CommonStoreKeeper):

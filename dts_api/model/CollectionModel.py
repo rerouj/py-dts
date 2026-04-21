@@ -3,6 +3,7 @@ from pydantic import BaseModel, Field, AliasChoices, model_validator, field_vali
 
 from dts_api.classes.Utils import set_path
 from dts_api.model.MetadataModel import IndexMetadataModel
+from dts_api.model.NavigationModel import CitationTree
 from dts_api.model.ViewModel import UrlComponent, View, PartialCollectionView
 from dts_api.settings.settings import get_settings
 
@@ -69,9 +70,10 @@ class SubCollection(CollectionBase):
 class SubCollectionResource(CollectionBase):
     navigation: str = "pagination"
     document: str = "collection"
-    download: str = Field(exclude=True, default=None)
+    download: str = Field(exclude=False, default=None)
     dtsVersion: str = Field(default=f"{settings.dts_version}", exclude=True)
     context: str = Field(serialization_alias="@context", default=f"{settings.dts_context}", exclude=True)
+    CitationTrees: list[CitationTree] = Field(default=[], serialization_alias="citationTrees", exclude=False)
 
     def model_post_init(self, __context: Any) -> None:
         # self.totalParents = self.index.depth + 1
@@ -83,7 +85,7 @@ class CollectionResource(CollectionBase):
 
     navigation: str = "pagination"
     document: str = "collection"
-    download: str = Field(exclude=True, default=None)
+    download: str = Field(exclude=False, default=None)
 
     items: list["SubCollection"] | list["SubCollectionResource"] = Field(
         validation_alias=AliasChoices("children", "works", "ti:edition"),

@@ -10,7 +10,7 @@ from dts_api.api.route.router import base_router
 from dts_api.classes.Cache import Cache
 from dts_api.classes.Store import Store
 from dts_api.errors.CustomError import validation_exception_handler, not_found_exception_handler, \
-    connection_error_exception_handler
+    connection_error_exception_handler, MetadataValidationError, md_validation_exception_handler
 from dts_api.settings.settings import settings
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -30,6 +30,7 @@ app = FastAPI(
     swagger_ui_parameters={"syntaxHighlight": {"theme": "obsidian"}},
     exception_handlers={
         RequestValidationError: validation_exception_handler,
+        MetadataValidationError: md_validation_exception_handler,
         HTTPException: not_found_exception_handler,
         URLError: connection_error_exception_handler
     }

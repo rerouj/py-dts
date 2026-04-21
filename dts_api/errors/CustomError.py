@@ -1,11 +1,41 @@
+from typing import Sequence, Any
 from urllib.error import URLError
 
 from fastapi import HTTPException
-from fastapi.exceptions import RequestValidationError
+from fastapi.exceptions import RequestValidationError, ValidationException
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
 from dts_api.model.Error import ErrorDict, BaseErrorMessage
+
+
+class MetadataValidationError(ValidationException):
+    def __init__(self, errors: Sequence[Any], *, body: Any = None) -> None:
+        super().__init__(errors)
+        self.body = body
+
+
+async def md_validation_exception_handler(request: Request, exc: MetadataValidationError) -> JSONResponse:
+    errors = []
+    for err in exc.errors():
+        errors.append({
+            "field": err["loc"],  # e.g., query.age
+            "message": err["msg"],
+            "type": err["type"]
+        })
+
+    e_dict = ErrorDict(
+        code=422,
+        type="validation_error",
+        message= "Invalid manifest content.",
+        details=errors
+    )
+    model = BaseErrorMessage(error=e_dict)
+
+    return JSONResponse(
+        status_code=422,
+        content=model.model_dump(),
+    )
 
 async def not_found_exception_handler(request: Request, exc: HTTPException) -> JSONResponse:
     error_message_type = {

@@ -1,7 +1,7 @@
 from typing import Protocol
 from collections import deque
 from dts_api.classes.Error import BadRangeError
-from dts_api.classes.RepresentationBuilder import NavigationContentBuilder, DocumentContentBuilder
+from dts_api.classes.RepresentationBuilder import CollectionContentBuilder, NavigationContentBuilder, DocumentContentBuilder
 
 
 class ContentExtractor(Protocol):
@@ -41,6 +41,19 @@ class JsonContentExtractor(CommonExtractor):
                     dataset = dataset[item]
             return dataset
         return dataset
+
+class CollectionContentExtractor(CommonExtractor):
+
+    def __init__(self, prefix, namespace, nsmap):
+        super().__init__(prefix, namespace, nsmap)
+        self.content_builder = CollectionContentBuilder()
+
+    def extract_content(self, *args, **kwargs):
+        if args:
+            _, = args
+        cite_structure= kwargs['structure']
+        citation_trees, max_cite_depth = self.content_builder.get_citation_trees(cite_structure)
+        return citation_trees, max_cite_depth
 
 class NavigationContentExtractor(CommonExtractor):
 

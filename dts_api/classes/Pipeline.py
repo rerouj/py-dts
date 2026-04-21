@@ -1,7 +1,7 @@
 from functools import reduce
 from typing import Protocol, Callable
 
-from dts_api.funcs.common import get_citation_trees, select_tree, prepare_path, prepare_md_path, tag_original_document, \
+from dts_api.funcs.common import set_citation_trees, select_tree, prepare_path, prepare_md_path, tag_original_document, \
     build_toc, complete_ref
 
 
@@ -14,7 +14,7 @@ class PipelineBuilder(Protocol):
 class TocPipelineBuilder:
 
     def __init__(self):
-        self.toc_func_array = [get_citation_trees, select_tree, prepare_path, prepare_md_path, tag_original_document, build_toc, complete_ref]
+        self.toc_func_array = [set_citation_trees, select_tree, prepare_path, prepare_md_path, tag_original_document, build_toc, complete_ref]
         self.toc_func_test = []
         self.toc_func_array.reverse()
         self.toc_func_test.reverse()

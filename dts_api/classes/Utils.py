@@ -141,7 +141,7 @@ def get_url_components(request: Request, params_model: CollectionParams | Naviga
     ]
     return UrlComponent(**dict(zip(component_schema, tmp_component)))
 
-def set_path(resource_id: str, field: str, url_components: UrlComponent):
+def set_path(resource_id: str, field: str, url_components: UrlComponent, sub_resource: bool = False) -> str:
     """
     Set url path for each view field, where complete url is needed
     see : https://distributed-text-services.github.io/specifications/versions/unstable/#collection-endpoint
@@ -161,13 +161,15 @@ def set_path(resource_id: str, field: str, url_components: UrlComponent):
 
     url = url_components.url.split('/')
     url[-1] = "%s/" % field
+    if not sub_resource:
+        url.pop(-2)
     components_dump["url"] = '/'.join(url)
     components_dump["query"] = components_dump["query"].split("&")[0] # remove all extra query params
 
     if field == 'collection':
-        components_dump["query"] = 'resource=%s{&ref,start,end,tree,mediaType}' % resource_id
-    elif field == 'navigation':
         components_dump["query"] = 'resource=%s{&page,nav}' % resource_id
+    elif field == 'navigation':
+        components_dump["query"] = 'resource=%s{&ref,start,end,tree,mediaType}' % resource_id
     elif field == 'document':
         components_dump["query"] = 'resource=%s{&ref,down,start,end,tree,mediaType}' % resource_id
     return urlunparse(Components(**components_dump))

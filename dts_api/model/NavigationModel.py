@@ -21,7 +21,7 @@ class NavigationModel(BaseModel):
 
 class NavigationResource(BaseModel):
     id: str = Field(default="Resource", serialization_alias="@id")
-    type: str = Field(default="Navigation", serialization_alias="@type")
+    type: str = Field(default="Resource", serialization_alias="@type")
     collection: str = Field(default="{?id,page,nav}")
     navigation: str = Field(default="{&page,nav}")
     document: str = Field(default="{&ref,down,start,end,tree,page}")
@@ -36,7 +36,7 @@ class CitationTree(BaseModel):
 class CiteStructure(BaseModel):
     type: str = Field(default="CiteStructure", serialization_alias="@type")
     citeType: str = Field(default="CiteStructure", serialization_alias="citeType")
-    citeStructure: list = Field(default=None, serialization_alias="citeStructure")
+    citeStructure: list["CiteStructure"] = Field(default=None, serialization_alias="citeStructure")
 
 @dataclasses.dataclass
 class OmitIfNone:
@@ -48,7 +48,7 @@ class CitableUnit(BaseModel):
     level: int | None
     parent: Annotated[str | None, OmitIfNone()] = Field(default=None)
     cite_type: str = Field(default="cite type", serialization_alias="citeType")
-    dublin_core: list | None = Field(default=None, serialization_alias="dublinCore")
+    dublin_core: dict | None = Field(default=None, serialization_alias="dublinCore")
     extensions: dict = Field(default=None)
 
     # include parent field when the value is set to None

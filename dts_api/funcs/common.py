@@ -1,7 +1,7 @@
 import re
 
 from copy import deepcopy
-from lxml.etree import Element, ElementTree, XML
+from lxml.etree import Element, ElementTree, XML, _Element
 from dts_api.classes.Utils import nsmp
 
 
@@ -34,7 +34,7 @@ def build_citation_trees(citation_trees: Element):
     max_cite_depth = []
     for tree in citation_trees:
         count = 0
-        tmp = [{"@type": "CiteStructure", "citeType": structure.get('unit'),
+        tmp = [{"type": 'CiteStructure', "citeType": structure.get('unit'),
                 "parent": structure.getparent().get('unit')} for structure in
                tree['element'].iter('{http://www.tei-c.org/ns/1.0}citeStructure')]
 
@@ -56,7 +56,7 @@ def build_citation_trees(citation_trees: Element):
             del item['parent']
         identifier = {'identifier': tree['name']}
         tmp[0] = {
-            "@type": "CitationTree",
+            "type": "CitationTree",
             "maxCiteDepth": count + 1,
             "citeStructure": [{**identifier, **tmp[0]}]
         }

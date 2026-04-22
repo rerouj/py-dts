@@ -32,7 +32,7 @@ class NavigationParams(BaseModel):
     ref: str = None
     start: str = None
     end: str = None
-    down: out_of_range_int = None
+    down: out_of_range_int = 1
     tree: str = "default"
     page: out_of_range_int = 1
     limit: out_of_range_int = 100

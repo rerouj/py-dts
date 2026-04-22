@@ -10,7 +10,7 @@ router = APIRouter()
 @router.get("/", response_model=NavigationModel, description="Navigation get endpoint")
 def get(params: navigation_params, service: service_selector):
     representation: NavigationModel = service.get(params)
-    return JSONResponse(content=representation.model_dump(by_alias=True, exclude_none=True), media_type="Content-Type: application/json")
+    return JSONResponse(content=representation.model_dump(by_alias=True, exclude_none=True, exclude_defaults=False), media_type="Content-Type: application/json")
 
 @router.post("/", description="Navigation post endpoint")
 def post():

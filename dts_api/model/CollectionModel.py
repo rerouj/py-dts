@@ -77,8 +77,8 @@ class SubCollectionResource(CollectionBase):
 
     def model_post_init(self, __context: Any) -> None:
         # self.totalParents = self.index.depth + 1
-        self.navigation = set_path(self.id, 'navigation', self.url_components)
-        self.document = set_path(self.id, 'document', self.url_components)
+        self.navigation = set_path(self.id, 'navigation', self.url_components, sub_resource=True)
+        self.document = set_path(self.id, 'document', self.url_components, sub_resource=True)
         self.collection = "%s?id=%s{?id,page,nav}" % (self.url_components.url, self.id)
 
 class CollectionResource(CollectionBase):

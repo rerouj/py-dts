@@ -44,8 +44,9 @@
 				-->
 				<citeStructure unit="book" match="//body/div" use="@n">
 					<citeData property="http://purl.org/dc/terms/title" use="head"/>
+					<citeData property="http://purl.org/dc/terms/language" use="lang"/>
 					<citeStructure unit="chapter" match="div" use="position()" delim=" ">
-						
+
 						<citeData property="http://purl.org/dc/terms/title" use="head"/>
 						
 						<citeStructure unit="verse" match="p" use="position()" delim=":">
@@ -83,6 +84,7 @@
         <body>
 			<div n="Matthieu">
 				<head xml:lang="fr">l'Evangile selon Saint-Matthieu</head>
+                <lang>gr</lang>
 				<div n="1">
 					<p n="1">
 						<line>

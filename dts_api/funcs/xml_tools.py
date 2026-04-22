@@ -53,7 +53,7 @@ def narrow_selection(member: list, start: str, end: str):
     return member[start_index:end_index]
 
 def term_extractor(ref: Element, nsmap):
-    terms = []
+    terms = {}
     citable_elements: Element = ref.findall('.//CitableData', namespaces=nsmap)
     citable: Element
     for citable in citable_elements:
@@ -62,7 +62,7 @@ def term_extractor(ref: Element, nsmap):
             citable.get('term'): dict(citable.attrib)
         }
         del term[citable.get('term')]['term']
-        terms.append(term)
+        terms.update(term)
 
     return terms if len(terms) else None
 

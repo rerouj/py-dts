@@ -33,8 +33,7 @@
                 "name": "postface",
                 "position": 1
               }
-            ],
-            "dublinCore": {}
+            ]
           },
           {
             "id": "st-augustin-confessions",
@@ -106,8 +105,7 @@
           }
         ],
         "description": "Description for Sub-Collection 1-1",
-        "depth": 1,
-        "dublinCore": {}
+        "depth": 1
       }
     ]
   }

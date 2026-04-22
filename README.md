@@ -157,6 +157,8 @@ Feel free to contribute to the project by submitting pull requests !
 
 ## Todos:
 
+- add manifest content validation. Ensure the content indicated by the manifest exists in the storage and is correctly formatted.
+- document : allow selection of a range by using a start/stop value that is not on the same citation level. For instance, ```start=Matthieu, end=Jean 2```
 - add a parameter that limits the reading scope of a document. For instance ```scope: 107, 120``` would only read the main citation element between 107 and 120 of the document. the parameter is set into the manifest.json file.
 - add JsonDesigner class to design a json representation of a Document.
 - allow non dublin core metadata to be extracted from an XML document and inserted inside the 'extension' field of a Navigation representation

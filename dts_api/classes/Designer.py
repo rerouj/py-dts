@@ -2,7 +2,6 @@ from typing import Protocol
 
 from lxml import etree
 from lxml.etree import ElementTree, Element, _Element, _ElementTree
-
 from dts_api.funcs.common import element_to_dict
 
 

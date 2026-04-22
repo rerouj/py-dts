@@ -393,3 +393,31 @@ def is_request_out_of_range(start: int, down: int, milestone: list):
         return int(max(list(set(list(map(lambda x: x.get('level'), milestone)))))) - start < down
     else:
         return False
+
+def element_to_dict(element: _Element):
+
+    """Recursively convert a lxml element to a dict."""
+    # Strip the namespace from the tag name
+
+    if element.tag[:-2] == 'lb':
+        return None
+
+    node = {
+        "tag": element.tag.split('}')[-1] if '}' in element.tag else element.tag,
+    }
+
+    # Add attributes if any
+    if element.attrib:
+        node["attributes"] = dict(element.attrib)
+
+    # Add text content if any (stripped)
+    text = element.text.strip() if element.text else ""
+    if text:
+        node["text"] = text
+
+    # Recursively process children
+    children = [element_to_dict(child) for child in element]
+    if children:
+        node["children"] = children
+
+    return node

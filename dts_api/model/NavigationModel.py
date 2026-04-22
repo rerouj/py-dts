@@ -9,7 +9,7 @@ settings = get_settings()
 
 class NavigationModel(BaseModel):
     context: str = Field(default=settings.dts_context, serialization_alias="@context")
-    dts_version: str = Field(default=settings.dts_version, serialization_alias="@dtsVersion")
+    dts_version: str = Field(default=settings.dts_version, serialization_alias="dtsVersion")
     type: str = Field(default="Navigation", serialization_alias="@type")
     id: str = Field(default="Resource", serialization_alias="@id")
     resource: "NavigationResource" = Field(default=None)
@@ -25,7 +25,7 @@ class NavigationResource(BaseModel):
     collection: str = Field(default="{?id,page,nav}")
     navigation: str = Field(default="{&page,nav}")
     document: str = Field(default="{&ref,down,start,end,tree,page}")
-    citation_trees: list["CitationTree"] = Field(default=[])
+    citation_trees: list["CitationTree"] = Field(default=[], serialization_alias="citationTrees")
 
 class CitationTree(BaseModel):
     identifier: str = Field(default=None)

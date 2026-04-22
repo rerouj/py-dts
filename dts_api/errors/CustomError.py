@@ -71,7 +71,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
         })
 
     e_dict = ErrorDict(
-        code=422,
+        code=400,
         type="validation_error",
         message= "Invalid request parameters.",
         details=errors
@@ -79,7 +79,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
     model = BaseErrorMessage(error=e_dict)
 
     return JSONResponse(
-        status_code=422,
+        status_code=400,
         content=model.model_dump(),
     )
 

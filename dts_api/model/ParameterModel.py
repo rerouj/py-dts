@@ -42,16 +42,17 @@ class NavigationParams(BaseModel):
     def check_param_cohesion(self) -> Self:
         if self.ref and self.start and self.end:
             raise HTTPException(status_code=400, detail="[model validation err] ref can't be used with start and end")
+        if self.ref and ((self.start and not self.end) or (self.end and not self.start)):
+            raise HTTPException(status_code=400, detail="[model validation err] ref can't be used with start or end")
         if self.ref is None and self.start is None and self.end is None and (self.down is None or self.down == 0):
-            # raise HTTPException(status_code=400, detail="[model validation err] At least one of the following parameters must be provided: ref, start, end, down, c.f.: https://distributed-text-services.github.io/specifications/versions/unstable/#navigation-endpoint")
-            self.down = -1
+            raise HTTPException(status_code=400, detail="[model validation err] At least one of the following parameters must be provided: ref, start, end, down, c.f.: https://dtsapi.org/specifications/versions/v1.0/#navigation-endpoint")
+            # self.down = -1
         if self.ref is None and (self.start is not None or self.end is not None) and self.down == 0:
-            raise HTTPException(status_code=400, detail="[model validation err] This milestone can't be reached: un-allowed request c.f.: https://distributed-text-services.github.io/specifications/versions/unstable/#navigation-endpoint")
+            raise HTTPException(status_code=400, detail="[model validation err] This milestone can't be reached: un-allowed request c.f.: https://dtsapi.org/specifications/versions/v1.0/#navigation-endpoint")
         if self.ref is None and self.start is not None and self.end is None:
             raise HTTPException(status_code=400, detail="[model validation err] This milestone can't be reached: please provide an end value")
         if self.ref is None and self.start is None and self.end is not None:
             raise HTTPException(status_code=400, detail="[model validation err] This milestone can't be reached: please provide a start value")
-
         return self
 
 class DocumentParams(BaseModel):

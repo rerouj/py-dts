@@ -28,6 +28,9 @@
       		<refsDecl>
 				<citeStructure unit="milestone" match="//milestone" use="@n">
 					<citeStructure unit="line" match="following::lb" use="position()" delim="."/>
+                    <citeStructure unit="pb" match="following::pb" use="@n" delim=".">
+                        <citeStructure unit="pb-line" match="following::lb" use="@n" delim=":"/>
+                    </citeStructure>
 				</citeStructure>
 				<citeStructure unit="page" match="//pb" use="@n">
 					<citeStructure unit="line" match="following::lb" use="@n" delim="."/>

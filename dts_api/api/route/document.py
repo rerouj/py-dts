@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Response, HTTPException
 from lxml import etree
-from starlette.responses import HTMLResponse
+from starlette.responses import HTMLResponse, JSONResponse
 
 from dts_api.deps.selectors import service_selector
 from dts_api.model.ParameterModel import document_params
@@ -16,6 +16,8 @@ def get(query: document_params, service: service_selector):
         return Response(content=etree.tostring(doc, encoding='UTF-8', pretty_print=True, xml_declaration=True), media_type="application/xml")
     if query.media_type == 'text/html':
         return HTMLResponse(str(doc))
+    if query.media_type == 'application/json':
+        return JSONResponse(content=doc)
 
 @router.post("/", description="Document Post endpoint")
 def post():

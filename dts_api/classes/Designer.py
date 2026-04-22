@@ -3,6 +3,8 @@ from typing import Protocol
 from lxml import etree
 from lxml.etree import ElementTree, Element, _Element, _ElementTree
 
+from dts_api.funcs.common import element_to_dict
+
 
 class Designer(Protocol):
 
@@ -86,3 +88,27 @@ class XmlDesigner:
                 body.append(element)
                 return document
             return None
+
+class JsonDesigner:
+    """ A simple static designer for JSON data.(beta version)"""
+    @staticmethod
+    def design_root(self, *args, **kwargs):
+        fragment, dts_resource, nsmap = args
+        if kwargs:
+            _, = kwargs
+
+        resource: _Element = fragment.find('TEI', namespaces=nsmap)
+        text: _Element = resource.find('.//text', namespaces=nsmap)
+
+        return element_to_dict(text)
+
+    @staticmethod
+    def design_subsection(self, *args, **kwargs):
+        fragment, dts_resource, nsmap = args
+        if kwargs:
+            _, = kwargs
+
+        if not fragment:
+            return None
+
+        return element_to_dict(fragment[0])

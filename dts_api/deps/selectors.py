@@ -7,7 +7,7 @@ from dts_api.service.services import *
 from dts_api.classes.Store import Store
 from dts_api.classes.Indexer import DefaultIndexer
 from dts_api.deps.settings import settings as main_settings
-from dts_api.classes.Designer import XmlDesigner, HtmlDesigner
+from dts_api.classes.Designer import XmlDesigner, HtmlDesigner, JsonDesigner
 from dts_api.classes.Database import LocalDatabase, GithubDatabase
 from dts_api.classes.FileStorage import LocalFileStorage, GithubFileStorage
 from dts_api.classes.Adapter import JsonAdapter, DefaultIngestor, DefaultExtractor
@@ -94,7 +94,7 @@ def designer_selector(request: Request):
     designers = {
         'text/xml': XmlDesigner,
         'text/html': HtmlDesigner,
-        #'json': JsonDesigner
+        'application/json': JsonDesigner
     }
 
     media_type = request.query_params.get('media_type')

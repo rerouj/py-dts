@@ -45,7 +45,7 @@ def custom_openapi():
         description=settings.app_description,
         version="0.1",
         servers=settings.app_url,
-        contact=settings.app_author_infos,
+        contact={"name": settings.app_author, "email": settings.app_author_email},
         routes=app.routes,
         tags=[
                 {"name": "root", "description": "Root route, returns global infos."},

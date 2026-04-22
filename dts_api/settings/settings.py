@@ -4,7 +4,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     app_name: str = None
     app_description: str = None
-    app_author_infos: dict = None
+    app_author: str = None
+    app_author_email: str = None
     app_url: list = [{"url": "http://localhost:8000", "description": "Localhost"}]
     allowed_hosts: list = ["http://localhost:5173"]
     dts_context: str = None

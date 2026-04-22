@@ -6,7 +6,7 @@ authors = ["renato <renato.diaz@unil.ch>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.11"
+python = "^3.11"
 fastapi = {extras = ["standard"], version = "^0.116.1"}
 pydantic-settings = "^2.7.1"
 pyfakefs = "^5.7.4"

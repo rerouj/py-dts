@@ -175,6 +175,7 @@ cython_debug/
 .pypirc
 #IntelliJ IDEA
 .idea/
+.vscode
 *.iml
 out/
 design/py-dts-backlog.md

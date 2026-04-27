@@ -167,7 +167,7 @@ def set_path(resource_id: str, field: str, url_components: UrlComponent, sub_res
     components_dump["query"] = components_dump["query"].split("&")[0] # remove all extra query params
 
     if field == 'collection':
-        components_dump["query"] = 'resource=%s{&page,nav}' % resource_id
+        components_dump["query"] = 'id=%s{&page,nav}' % resource_id
     elif field == 'navigation':
         components_dump["query"] = 'resource=%s{&ref,start,end,tree,mediaType}' % resource_id
     elif field == 'document':
